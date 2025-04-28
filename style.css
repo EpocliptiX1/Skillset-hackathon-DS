@@ -167,7 +167,8 @@ header p {
 }
 
 .imageResponsiveSize {
-    background-image: url(/Images/blue\ binary.jpeg);
+    /* background-image: url(/blue\ binary.jpeg); */
+    background-image: url(/images/blue\ binary.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -690,6 +691,9 @@ footer a:hover {
 @media (max-width: 710px) {
     .nav-search {
         display: none;
+    }
+    .quiz-form-btns {
+        display: block;
     }
 }
 
