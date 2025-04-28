@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlashLearn</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="/script.js"></script>
+    <script src="/script-quizData.js"></script>
+    <script src="/script-quizHandle.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+
+        <div class="logo">FlashLearn</div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a class="black-txt" href="#study-modes">Study Modes</a></li>
+            <li><a class="black-txt" href="#subjects">Subjects</a></li>
+            <li><a class="black-txt" href="#live-quiz">Live Quiz</a></li>
+            <li><a class="black-txt" href="#flashcards">Flashcards</a></li>
+        </ul>
+
+        <div class="nav-search" id="nav-search">
+            <input type="text" id="searchInput" placeholder="Search terms...">
+        </div>
+
+        <div class="nav-auth" id="nav-auth">
+            <button onclick="openSignupForm()">Sign Up</button>
+            <button onclick="openSigninForm()">Sign In</button>
+        </div>
+    </nav>
+
+
+    <header>
+        <h1>How do you want to study?</h1>
+        <p>Master what you're learning with flashcards, tests, and more.</p>
+    </header>
+
+    <section class="hero">
+        <div class="text">
+            <h2>Choose a subject below</h2>
+            <p>Here is a test for the subject you have chosen:</p>
+            <div class="chosen-subject-test-container"></div>
+        </div>
+        <div class="image imageResponsiveSize"></div>
+    </section>
+    <section id="create-quiz">
+        <h2>Create Your Own Quiz</h2>
+
+        <div class="quiz-form">
+            <label>Quiz Title:</label>
+            <input type="text" id="quizTitle" placeholder="Enter quiz title...">
+
+            <div id="questions-container"></div>
+
+            <div class="quiz-form-btns">
+                <button id="add-question-btn" onclick="addQuestion()">Add Question</button>
+                <button id="save-quiz-btn" onclick="saveQuiz()">Save Quiz</button>
+                <button id="import-quiz-btn" onclick="importQuiz()">Import Quiz</button>
+                <button id="upload-quiz-btn" onclick="uploadQuiz()">Release Quiz</button>
+                <input type="file" id="importFile" style="display:none;" accept=".json" onchange="handleFileImport(event)">
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="flashcard-scroll" id="flashcards"></section>
+
+    <section class="study-modes" id="study-modes">
+        <h2>Study Modes</h2>
+        <div class="modes-container">
+            <div class="mode">
+                <h3>Flashcards</h3>
+                <p>Study at your pace.</p>
+            </div>
+            <div class="mode">
+                <h3>Learn</h3>
+                <p>Track your mastery.</p>
+            </div>
+            <div class="mode">
+                <h3>Write</h3>
+                <p>Boost memory by writing.</p>
+            </div>
+            <div class="mode">
+                <h3>Spell</h3>
+                <p>Practice spelling with prompts.</p>
+            </div>
+            <div class="mode">
+                <h3>Test</h3>
+                <p>Take practice tests.</p>
+            </div>
+            <div class="mode">
+                <h3>Match</h3>
+                <p>Match terms and definitions.</p>
+            </div>
+        </div>
+    </section>
+    <!--BUHEFG8G7RGNEWH-->
+    <section class="subjects" id="subjects">
+        <h2>Subjects</h2>
+        <div class="subjects-container">
+            <button class="subject-btn" data-subject="math">Mathematics</button>
+            <button class="subject-btn" data-subject="science">Science</button>
+            <button class="subject-btn" data-subject="history">History</button>
+        </div>
+
+        <div class="filter-toolbar">
+            <input type="text" id="searchInput2" placeholder="Search flashcards..." />
+            <button id="shuffleBtn">🔀 Shuffle</button>
+            <select id="difficultyFilter">
+                <option value="">All Difficulties</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+
+        <div id="flashcard-container" class="flashcard-scroll"></div>
+    </section>
+    <section class="live-quiz" id="live-quiz">
+        <div class="live-quiz-content">
+            <div class="live-quiz-text">
+                <h2>Join a Random Live Quiz</h2>
+                <p>Join a real-time quiz with others!</p>
+            </div>
+            <div class="join-quiz-possible-topics-Main" style="width: 40%;">
+                <h2 style="margin-bottom: 10px;">Possible Quiz Topics</h2>
+                <ul style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <div>
+                        <li>French culture after the revolution</li>
+                        <li>Fossils and the origins of the universe</li>
+                    </div>
+                    <div class="join-quiz-possible-topics2">
+                        <li>Chemical reactions</li>
+                        <li>Graph equations</li>
+                    </div>
+
+
+                </ul>
+            </div>
+
+            <button class="join-quiz-btn" onclick="openQuizForm()">Join Now</button>
+        </div>
+    </section>
+
+    <!-- Forms -->
+    <div class="form-popup" id="signupForm">
+        <form class="form-container">
+            <h2>Sign Up</h2>
+            <input type="text" placeholder="Name" required>
+            <input type="email" placeholder="Email" required>
+            <button type="submit" class="btn">Sign Up</button>
+            <button type="button" class="btn cancel" onclick="closeSignupForm()">Cancel</button>
+        </form>
+    </div>
+
+    <div class="form-popup" id="signinForm">
+        <form class="form-container">
+            <h2>Sign In</h2>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit" class="btn">Sign In</button>
+            <button type="button" class="btn cancel" onclick="closeSigninForm()">Cancel</button>
+        </form>
+    </div>
+
+    <div class="form-popup" id="quizForm">
+        <form class="form-container">
+            <h2>Join Quiz</h2>
+            <input type="text" placeholder="Name" required>
+            <input type="email" placeholder="Email" required>
+            <select required>
+        <option value="">Choose Subject</option>
+        <option value="math">Mathematics</option>
+        <option value="science">Science</option>
+        <option value="history">History</option>
+      </select>
+            <button type="submit" class="btn">Join</button>
+            <button type="button" class="btn cancel" onclick="closeQuizForm()">Cancel</button>
+        </form>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>About us</h4>
+                <ul>
+                    <li><a href="#">About FlashLearn</a></li>
+                    <li><a href="#">How it works</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>For students</h4>
+                <ul>
+                    <li><a href="#">Flashcards</a></li>
+                    <li><a href="#">Test</a></li>
+                    <li><a href="#">Learn</a></li>
+                    <li><a href="#">Pomodoro Timer</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>For teachers</h4>
+                <ul>
+                    <li><a href="#">Live</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>
